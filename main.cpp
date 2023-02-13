@@ -55,7 +55,8 @@ int main()
 		else {
 			cout << "Detect Failed!" << endl;
 		}
-		cv::waitKey(1);
+		if (cv::waitKey(30) >= 0) 
+			break;
 	}
 
 	system("pause");
