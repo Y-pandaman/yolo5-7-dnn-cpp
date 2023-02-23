@@ -12,10 +12,10 @@ using namespace dnn;
 
 int main()
 {
-	string img_path = "../images/bus.jpg";
+	string img_path = "../images/1.jpg";
 
 #if(defined YOLOV5 && YOLOV5==true)
-	string model_path = "models/yolov5s.onnx";
+	string model_path = "models/best.onnx";
 #else
 	string model_path = "../models/yolov7.onnx";
 #endif
@@ -36,21 +36,24 @@ int main()
 
 	while(1){
 		//生成随机颜色
-		cap >> frame;
+		// cap >> frame;
 		vector<Scalar> color;
 		srand(time(0));
 		for (int i = 0; i < 80; i++) {
-			int b = rand() % 256;
-			int g = rand() % 256;
-			int r = rand() % 256;
+			// int b = rand() % 256;
+			// int g = rand() % 256;
+			// int r = rand() % 256;
+			int b = i * 3 % 256;
+			int g = i * 3 % 256;
+			int r = i * 3 % 256;
 			color.push_back(Scalar(b, g, r));
 		}
 		vector<Output> result;
-		// Mat img = imread(img_path);
+		Mat frame = imread(img_path);
 
 		if (test.Detect(frame, net, result)) {
 			test.drawPred(frame, result, color);
-			imshow("1", frame);
+			imshow("test", frame);
 		}
 		else {
 			cout << "Detect Failed!" << endl;
